@@ -1,0 +1,18 @@
+/* ANIMASI SCROLL */
+
+.card,
+.stat-card,
+.group-box,
+.section-title{
+  opacity:0;
+  transform:translateY(80px);
+  transition:1s ease;
+}
+
+.card.show,
+.stat-card.show,
+.group-box.show,
+.section-title.show{
+  opacity:1;
+  transform:translateY(0);
+}

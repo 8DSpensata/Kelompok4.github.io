@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kelompok 4 Kelas 9C</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    section{
+      scroll-margin-top:100px;
+    }
+
+    body{
+      background:
+      radial-gradient(circle at top left,#1d4ed8 0%,transparent 30%),
+      radial-gradient(circle at bottom right,#0891b2 0%,transparent 30%),
+      linear-gradient(135deg,#020617,#0f172a,#111827);
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* SCROLLBAR */
+
+    ::-webkit-scrollbar{
+      width:10px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#38bdf8;
+      border-radius:20px;
+    }
+
+    .container{
+      width:90%;
+      max-width:1300px;
+      margin:auto;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:fixed;
+      width:100%;
+      top:0;
+      left:0;
+      z-index:1000;
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 7%;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:700;
+      color:#38bdf8;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:25px;
+    }
+
+    .nav-links a{
+      color:white;
+      text-decoration:none;
+      font-weight:500;
+      transition:.3s;
+    }
+
+    .nav-links a:hover{
+      color:#38bdf8;
+      transform:translateY(-2px);
+    }
+
+    /* MOBILE MENU */
+
+    .menu-btn{
+      display:none;
+      font-size:32px;
+      cursor:pointer;
+      color:white;
+    }
+
+    #menu-check{
+      display:none;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:130px 20px 80px;
+      position:relative;
+    }
+
+    .hero-box{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+      backdrop-filter:blur(14px);
+      padding:60px;
+      border-radius:35px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.4);
+      position:relative;
+      overflow:hidden;
+      width:100%;
+      max-width:1000px;
+    }
+
+    .hero-box::before{
+      content:'';
+      position:absolute;
+      width:250px;
+      height:250px;
+      background:#38bdf8;
+      filter:blur(120px);
+      opacity:.2;
+      top:-80px;
+      right:-80px;
+    }
+
+    .hero h1{
+      font-size:70px;
+      font-weight:800;
+      line-height:1.1;
+      margin-bottom:25px;
+      background:linear-gradient(to right,#38bdf8,#60a5fa,#2563eb);
+
+      /* FIX WEBKIT */
+      background-clip:text;
+      -webkit-background-clip:text;
+      color:transparent;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      font-size:18px;
+      color:#cbd5e1;
+      line-height:1.9;
+      max-width:850px;
+      margin:auto;
+    }
+
+    .btn{
+      display:inline-block;
+      margin-top:35px;
+      padding:16px 38px;
+      border-radius:18px;
+      text-decoration:none;
+      color:white;
+      font-weight:600;
+      background:linear-gradient(45deg,#06b6d4,#2563eb);
+      box-shadow:0 10px 25px rgba(37,99,235,.4);
+      transition:.4s;
+    }
+
+    .btn:hover{
+      transform:translateY(-6px) scale(1.05);
+    }
+
+    /* MEMBERS */
+
+    .members{
+      padding:20px 20px 100px;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:60px;
+    }
+
+    .section-title h2{
+      font-size:60px;
+      margin-bottom:15px;
+    }
+
+    .section-title p{
+      color:#94a3b8;
+      font-size:18px;
+    }
+
+    .member-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:30px;
+      padding:35px;
+      text-align:center;
+      backdrop-filter:blur(12px);
+      transition:1s ease;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 15px 35px rgba(0,0,0,0.3);
+
+      opacity:0;
+      transform:translateY(80px);
+    }
+
+    .card.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .card::before{
+      content:'';
+      position:absolute;
+      width:100%;
+      height:5px;
+      background:linear-gradient(to right,#38bdf8,#2563eb);
+      top:0;
+      left:0;
+    }
+
+    .card:hover{
+      transform:translateY(-12px) scale(1.03);
+      background:rgba(255,255,255,0.08);
+    }
+
+    .avatar{
+      width:110px;
+      height:110px;
+      border-radius:50%;
+      margin:auto;
+      margin-bottom:22px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:42px;
+      font-weight:700;
+      background:linear-gradient(to right,#38bdf8,#2563eb);
+      box-shadow:0 10px 25px rgba(37,99,235,.5);
+    }
+
+    .card h3{
+      font-size:22px;
+      margin-bottom:10px;
+      word-break:break-word;
+    }
+
+    .role{
+      color:#38bdf8;
+      font-weight:600;
+      margin-bottom:16px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      border-top:1px solid rgba(255,255,255,0.1);
+      text-align:center;
+      padding:35px;
+      color:#94a3b8;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      .menu-btn{
+        display:block;
+      }
+
+      .nav-links{
+        position:absolute;
+        top:80px;
+        right:-100%;
+        width:250px;
+        background:rgba(15,23,42,.98);
+        backdrop-filter:blur(12px);
+        flex-direction:column;
+        padding:30px;
+        border-radius:20px;
+        transition:.4s;
+      }
+
+      .nav-links a{
+        width:100%;
+        padding:12px;
+        border-radius:10px;
+      }
+
+      #menu-check:checked ~ .nav-links{
+        right:20px;
+      }
+
+      .hero h1{
+        font-size:42px;
+      }
+
+      .hero p{
+        font-size:15px;
+      }
+
+      .hero-box{
+        padding:40px 25px;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .section-title h2{
+        font-size:38px;
+      }
+
+      .member-grid{
+        grid-template-columns:1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav>
+
+    <div class="nav-container">
+
+      <div class="logo">Kelompok 4</div>
+
+      <input type="checkbox" id="menu-check">
+
+      <label for="menu-check" class="menu-btn">
+        ☰
+      </label>
+
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#anggota">Anggota</a>
+      </div>
+
+    </div>
+
+  </nav>
+
+  <section class="hero" id="home">
+
+    <div class="hero-box">
+
+      <h1>WEBSITE KELOMPOK 4 KELAS 9C</h1>
+
+      <p>
+        "Selamat datang di ruang kolaborasi kami. Melalui proyek Suling Daman,
+        kami menyatukan ide, kreativitas, dan kerja keras untuk menciptakan
+        solusi yang bermakna."
+      </p>
+
+      <a href="#anggota" class="btn">Lihat Anggota</a>
+
+    </div>
+
+  </section>
+
+  <section class="members" id="anggota">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>KELOMPOK 4</h2>
+
+        <p>
+          Tim kreatif yang bekerja sama untuk menghasilkan proyek terbaik.
+        </p>
+
+      </div>
+
+      <div class="member-grid">
+
+        <div class="card">
+          <div class="avatar">A</div>
+          <h3>ALFIAN OCTARIZKY ARDHIANSYAH</h3>
+          <div class="role">Ketua Kelompok</div>
+        </div>
+
+        <div class="card">
+          <div class="avatar">B</div>
+          <h3>ABDUL AZIZ</h3>
+          <div class="role">Wakil Ketua</div>
+        </div>
+
+        <div class="card">
+          <div class="avatar">C</div>
+          <h3>EMIR KANZ FAWWAZ LIMASTA</h3>
+          <div class="role">ANGGOTA</div>
+        </div>
+
+        <div class="card">
+          <div class="avatar">D</div>
+          <h3>ABDUL ALIM DAHRUJI JAYADI</h3>
+          <div class="role">ANGGOTA</div>
+        </div>
+
+        <div class="card">
+          <div class="avatar">E</div>
+          <h3>BOBBY RULYANSYAH</h3>
+          <div class="role">ANGGOTA</div>
+        </div>
+
+        <div class="card">
+          <div class="avatar">F</div>
+          <h3>SYIFAUL ULYANI</h3>
+          <div class="role">ANGGOTA</div>
+        </div>
+
+        <div class="card">
+          <div class="avatar">G</div>
+          <h3>ANANTA ZAKARIA ZAIN</h3>
+          <div class="role">ANGGOTA</div>
+        </div>
+
+        <div class="card">
+          <div class="avatar">H</div>
+          <h3>INTAN DWI KLARISTA PUTRI</h3>
+          <div class="role">ANGGOTA</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    <p>
+      © 2026 Website Kelompok 4 • Dibuat dengan HTML & CSS Modern.
+    </p>
+  </footer>
+
+  <script>
+
+    const observer = new IntersectionObserver((entries)=>{
+
+      entries.forEach((entry)=>{
+
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+        }
+
+      });
+
+    },{
+      threshold:0.2
+    });
+
+    document.querySelectorAll(".card").forEach((el)=>{
+      observer.observe(el);
+    });
+
+  </script>
+
+</body>
+</html>
